@@ -1,0 +1,53 @@
+header {
+    background-color: #384c3c;
+    margin-top: -0.4vh;
+    scale: 120%;
+}
+body {
+    background-color: #6C8B67;
+}
+h1{
+  text-align: left;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 3.4vw;
+    margin-top: 2.8vh;
+}
+.box{
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  width: 85%;
+  background-color: white;
+  padding-inline: 40px;
+  padding-top: 3.5vh;
+  margin: auto;
+  border-radius: 2vw;
+  margin-top: 2.7vh;
+}
+PFnumber{
+  text-align: left;
+  color: black;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: bold;
+  font-size: 3.3vw;
+  margin-left: 2%;
+}
+valor-box{
+  text-align: center;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.2vw;
+  background-color: #92A299;
+  border-radius: 1.4vw;
+  margin: 2%;
+  position: relative;
+  top: 35%;
+  padding: 3%;
+}
+.subinfo{
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.5vw;
+  padding-top: 2%;
+}
