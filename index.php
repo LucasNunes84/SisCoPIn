@@ -2,34 +2,17 @@
 
     require "src/bd-connect.php";
 
-    
+    $sql1 = "SELECT 
+                con_PF.numero, con_PF.valor, con_PF.dt_siafi, con_PF.conta, con_PF.resp, disp_PF.disp
+            FROM 
+                con_PF, disp_PF
+            WHERE 
+                con_PF.id_reg=disp_PF.pf_reg"
+            ;
 
-    $progFin = [
-        [
-            'numero' => "2023PF023476",
-            'valorTotal' => "30.587,12",
-            'valorRestante' => "26.422,01",
-            'data' => "21/06/2023",
-            'conta' => "TDCNAB240",
-            'UG' => "3ºRC Mec"
-        ],
-        [
-            'numero' => "2023PF023223",
-            'valorTotal' => "4.800,10",
-            'valorRestante' => "1.212,86",
-            'data' => "18/06/2023",
-            'conta' => "TDINC2222",
-            'UG' => "3ºBLog"
-        ],
-        [
-            'numero' => "2023PF020123",
-            'valorTotal' => "10.117,66",
-            'valorRestante' => "200,01",
-            'data' => "03/07/2023",
-            'conta' => "TDCNAB240",
-            'UG' => "25ºGAC"
-        ]
-    ];
+    $statement = $pdo -> query($sql1);
+    $progFin = $statement -> fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 <!DOCTYPE html>
 <head>
@@ -50,20 +33,20 @@
         </div>
         <div>
             <valor-box>
-                Valor Total: R$ <?php echo $pf['valorTotal']?>
+                Valor Total: R$ <?php echo $pf['valor']?>
             </valor-box>
             <valor-box>
-               Valor Restante: R$ <?php echo $pf['valorRestante']?>
+               Valor Restante: R$ <?php echo $pf['disp']?>
             </valor-box>
         </div>
         <div>
             <p class="subinfo">
-                Data: <?php echo $pf['data']?>
+                Data: <?php echo $pf['dt_siafi']?>
             </p>
         </div>
         <div>
             <p class="subinfo">
-                CC: <?php echo $pf['conta']?> - <?php echo $pf['UG']?>
+                CC: <?php echo $pf['conta']?> - <?php echo $pf['resp']?>
             </p>
         </div>
     </div>
