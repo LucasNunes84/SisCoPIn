@@ -33,15 +33,15 @@
         </div>
         <div>
             <valor-box>
-                Valor Total: R$ <?php echo $pf['valor']?>
+                Valor Total: R$ <?php echo str_replace('#','.', str_replace('.',',', str_replace(',', '#', number_format($pf['valor'], 2))))?>
             </valor-box>
             <valor-box>
-               Valor Restante: R$ <?php echo $pf['disp']?>
+               Valor Restante: R$ <?php echo str_replace('#','.', str_replace('.',',', str_replace(',', '#', number_format($pf['disp'], 2))))?>
             </valor-box>
         </div>
         <div>
             <p class="subinfo">
-                Data: <?php echo $pf['dt_siafi']?>
+                Data: <?php echo date("d/m/Y", strtotime($pf['dt_siafi']))?>
             </p>
         </div>
         <div>
