@@ -40,13 +40,22 @@
                         <label2>Número da PF:</label2>
                         <input type="number" name="number" />
                         <label2>Conta:</label2>
-                        <select name="tipo">
+                        <select style="margin-right: 1.4vw;" name="tipo">
                             <option value="">ESCOLHA UMA CONTA</option>
                             <option value="TDCNAB240">TDCNAB240</option>
                             <option value="TDINC2222">TDINC2222</option>
                             <option value="160063">160063</option>
                             <option value="REP">Repasse</option>
                         </select>
+                        <label2>Data:</label2>
+                        <input type="date" name="date" />
+                        <label2>UG/Credor:</label2>
+                        <input type="text" name="resp" />
+                        <label2>Valor:</label2>
+                        <input type="number" min="1" step="any" name="value"><br>
+                        <label2 style="align-content:left">Observação:</label2><br>
+                        <textarea type="text" id="textbox" name="obs" placeholder="insira aqui uma observação."></textarea><br>
+                        <input type="submit" value="CADASTRAR" />
                     </form>
                 </div>
             ';

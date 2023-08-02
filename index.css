@@ -115,6 +115,7 @@ valor-box{
 }
 select{
   text-align-last: center;
+  width: auto;
 }
 form{
   margin: -1.2vh;
@@ -125,9 +126,19 @@ form{
   width: 0.4vw;
 }
 label2{
-  font-size: medium;
+  font-size: 1.5vh;
   font-weight: lighter;
 }
 input{
-  margin-right: 1.4vw;
+  margin-right: 0.7vw;
+  font-size: 1.8vh;
+  width: 8vw;
+  margin-bottom: 2vh;
+}
+
+#textbox{
+  height: 20vh;
+  width:70vw;
+  margin-bottom: 2.3vh;
+  font-size: 1.8vh;
 }
