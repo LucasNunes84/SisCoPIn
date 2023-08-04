@@ -1,3 +1,8 @@
+<?php
+
+    require "src/bd-connect.php";
+
+?>
 <!DOCTYPE html>
 <head>
     <link rel="stylesheet" href="index.css">
@@ -40,7 +45,7 @@
                         <label2>Número da PF:</label2>
                         <input type="number" name="number" />
                         <label2>Conta:</label2>
-                        <select style="margin-right: 1.4vw;" name="tipo">
+                        <select style="margin-right: 1.4vw;" name="conta">
                             <option value="">ESCOLHA UMA CONTA</option>
                             <option value="TDCNAB240">TDCNAB240</option>
                             <option value="TDINC2222">TDINC2222</option>
@@ -59,6 +64,9 @@
                     </form>
                 </div>
             ';
+            
+            // $sql = "INSERT INTO con_PF ()
+            // VALUES ()";
         }
         ?>
     </div>

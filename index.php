@@ -1,6 +1,7 @@
 <?php
 
     require "src/bd-connect.php";
+    require "src/model/progFin.php";
 
     $sql1 = "SELECT 
                 con_PF.numero, con_PF.valor, con_PF.dt_siafi, con_PF.conta, con_PF.resp, disp_PF.disp
@@ -12,6 +13,17 @@
 
     $statement = $pdo -> query($sql1);
     $progFin = $statement -> fetchAll(PDO::FETCH_ASSOC);
+    
+    $dadosPF = array_map(function ($PF){
+        return new progFin(
+            $PF['numero'],
+            $PF['valor'],
+            $PF['dt_siafi'],
+            $PF['conta'],
+            $PF['resp'],
+            $PF['disp']
+        );
+    }, $progFin);
 
     $sql1 = "SELECT 
                 con_PF.numero, con_PF.valor, con_PF.dt_siafi, con_PF.conta, con_PF.resp, disp_PF.disp
@@ -43,27 +55,27 @@
 </header>
 <body>
     <h1 style="text-align: center;color:white;">Programações Financeiras em ABERTO</h1>
-    <?php foreach($progFin as $pf): ?>
+    <?php foreach($dadosPF as $pf): ?>
     <div class="box">
         <div>
-            <PFnumber><?php echo $pf['numero']?></PFnumber>
+            <PFnumber><?php echo $pf->getNumber()?></PFnumber>
         </div>
         <div>
             <valor-box>
-                Valor Total: R$ <?php echo str_replace('#','.', str_replace('.',',', str_replace(',', '#', number_format($pf['valor'], 2))))?>
+                Valor Total: R$ <?php echo str_replace('#','.', str_replace('.',',', str_replace(',', '#', number_format($pf->getValue(), 2))))?>
             </valor-box>
             <valor-box>
-               Valor Restante: R$ <?php echo str_replace('#','.', str_replace('.',',', str_replace(',', '#', number_format($pf['disp'], 2))))?>
+               Valor Restante: R$ <?php echo str_replace('#','.', str_replace('.',',', str_replace(',', '#', number_format($pf->getDisp(), 2))))?>
             </valor-box>
         </div>
         <div>
             <p class="subinfo">
-                Data: <?php echo date("d/m/Y", strtotime($pf['dt_siafi']))?>
+                Data: <?php echo date("d/m/Y", strtotime($pf->getDate()))?>
             </p>
         </div>
         <div>
             <p class="subinfo">
-                CC: <?php echo $pf['conta']?> - <?php echo $pf['resp']?>
+                CC: <?php echo $pf->getConta()?> - <?php echo $pf->getResp()?>
             </p>
         </div>
     </div>
