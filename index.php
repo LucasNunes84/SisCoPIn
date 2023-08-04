@@ -35,6 +35,17 @@
     $statement = $pdo -> query($sql1);
     $closedProgFin = $statement -> fetchAll(PDO::FETCH_ASSOC);
 
+    $dadosClosedPF = array_map(function ($PF){
+        return new progFin(
+            $PF['numero'],
+            $PF['valor'],
+            $PF['dt_siafi'],
+            $PF['conta'],
+            $PF['resp'],
+            $PF['disp']
+        );
+    }, $closedProgFin);
+
 ?>
 <!DOCTYPE html>
 <head>
@@ -62,15 +73,15 @@
         </div>
         <div>
             <valor-box>
-                Valor Total: R$ <?php echo str_replace('#','.', str_replace('.',',', str_replace(',', '#', number_format($pf->getValue(), 2))))?>
+                Valor Total: R$ <?php echo $pf->getFormatedValue($pf->getValue())?>
             </valor-box>
             <valor-box>
-               Valor Restante: R$ <?php echo str_replace('#','.', str_replace('.',',', str_replace(',', '#', number_format($pf->getDisp(), 2))))?>
+               Valor Restante: R$ <?php echo $pf->getFormatedValue($pf->getDisp())?>
             </valor-box>
         </div>
         <div>
             <p class="subinfo">
-                Data: <?php echo date("d/m/Y", strtotime($pf->getDate()))?>
+                Data: <?php echo $pf->getFormatedDate($pf->getDate())?>
             </p>
         </div>
         <div>
@@ -83,27 +94,27 @@
 
 
     <h1 style="text-align: center;color:white;">Programações Financeiras FECHADAS</h1>
-    <?php foreach($closedProgFin as $pf): ?>
+    <?php foreach($dadosClosedPF as $pf): ?>
     <div class="box">
         <div>
-            <PFnumber><?php echo $pf['numero']?></PFnumber>
+            <PFnumber><?php echo $pf->getNumber()?></PFnumber>
         </div>
         <div>
             <valor-box>
-                Valor Total: R$ <?php echo str_replace('#','.', str_replace('.',',', str_replace(',', '#', number_format($pf['valor'], 2))))?>
+                Valor Total: R$ <?php echo $pf->getFormatedValue($pf->getValue())?>
             </valor-box>
             <valor-box>
-               Valor Restante: R$ <?php echo str_replace('#','.', str_replace('.',',', str_replace(',', '#', number_format($pf['disp'], 2))))?>
+               Valor Restante: R$ <?php echo $pf->getFormatedValue($pf->getDisp())?>
             </valor-box>
         </div>
         <div>
             <p class="subinfo">
-                Data: <?php echo date("d/m/Y", strtotime($pf['dt_siafi']))?>
+                Data: <?php echo $pf->getFormatedDate($pf->getDate())?>
             </p>
         </div>
         <div>
             <p class="subinfo">
-                CC: <?php echo $pf['conta']?> - <?php echo $pf['resp']?>
+                CC: <?php echo $pf->getConta()?> - <?php echo $pf->getResp()?>
             </p>
         </div>
     </div>

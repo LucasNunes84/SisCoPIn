@@ -13,8 +13,6 @@ class progFin{
 
     private string $dt_siafi;
 
-
-    //Data SIAFI adicionada
     public function __construct(string $numero, float $valor, string $dt_siafi, string $conta, string $resp, float $disp)
     {
         $this->numero = $numero;
@@ -23,6 +21,15 @@ class progFin{
         $this->valor = $valor;
         $this->disp = $disp;
         $this->dt_siafi = $dt_siafi;
+   }
+   
+   public function getFormatedValue(float $valor): string
+   {
+       return str_replace('#','.', str_replace('.',',', str_replace(',', '#', number_format($valor, 2))));
+   }
+
+   public function getFormatedDate(string $date): string{
+        return date("d/m/Y", strtotime($date));
    }
 
     public function getNumber(): string{
@@ -47,7 +54,8 @@ class progFin{
 
     public function getDate(): string{
         return $this->dt_siafi;
-    }    
+    }
+
 }
 
 ?>
