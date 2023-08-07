@@ -1,6 +1,8 @@
 <?php
 
     require "src/bd-connect.php";
+    require "model/progFin.php";
+    require "repository/progFinRepository.php";
 
 ?>
 <!DOCTYPE html>
