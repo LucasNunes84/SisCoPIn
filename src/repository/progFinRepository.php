@@ -10,7 +10,7 @@
 
         public function openPF(){
             $sql1 = "SELECT 
-                con_PF.numero, con_PF.valor, con_PF.dt_siafi, con_PF.conta, con_PF.resp, disp_PF.disp
+                con_PF.id_reg, con_PF.numero, con_PF.valor, con_PF.dt_siafi, con_PF.conta, con_PF.resp, disp_PF.disp
             FROM 
                 con_PF, disp_PF
             WHERE 
@@ -22,6 +22,7 @@
             
             $dadosPF = array_map(function ($PF){
                 return new progFin(
+                    $PF['id_reg'],
                     $PF['numero'],
                     $PF['valor'],
                     $PF['dt_siafi'],
@@ -36,7 +37,7 @@
 
         public function closedPF(){
             $sql1 = "SELECT 
-                con_PF.numero, con_PF.valor, con_PF.dt_siafi, con_PF.conta, con_PF.resp, disp_PF.disp
+                con_PF.id_reg, con_PF.numero, con_PF.valor, con_PF.dt_siafi, con_PF.conta, con_PF.resp, disp_PF.disp
             FROM 
                 con_PF, disp_PF
             WHERE 
@@ -48,6 +49,7 @@
 
             $dadosClosedPF = array_map(function ($PF){
                 return new progFin(
+                    $PF['id_reg'],
                     $PF['numero'],
                     $PF['valor'],
                     $PF['dt_siafi'],
@@ -58,6 +60,17 @@
             }, $closedProgFin);
 
             return $dadosClosedPF;
+        }
+
+        public function salvar(progFin $progFin){
+            $sql = "INSERT INTO con_PF (numero, valor, dt_siafi, conta, resp) VALUES (?,?,?,?,?)";
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue(1, $progFin->getNumber());
+            $statement->bindValue(2, $progFin->getValue());
+            $statement->bindValue(3, $progFin->getDate());
+            $statement->bindValue(4,$progFin->getConta());
+            $statement->bindValue(5, $progFin->getResp());
+            $statement->execute();
         }
     }
 ?>

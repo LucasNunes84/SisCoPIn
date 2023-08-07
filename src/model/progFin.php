@@ -1,6 +1,9 @@
 <?php
 
 class progFin{
+
+    private ?int $id;
+
     private string $numero;
 
     private float $valor;
@@ -13,8 +16,9 @@ class progFin{
 
     private string $dt_siafi;
 
-    public function __construct(string $numero, float $valor, string $dt_siafi, string $conta, string $resp, float $disp)
+    public function __construct(?int $id, string $numero, float $valor, string $dt_siafi, string $conta, string $resp, float $disp)
     {
+        $this->id = $id;
         $this->numero = $numero;
         $this->conta = $conta;
         $this->resp = $resp;
