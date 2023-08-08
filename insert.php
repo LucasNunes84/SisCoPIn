@@ -42,9 +42,9 @@
         session_start();
         if($selectOption == 'PF' ){
             header("Location: insert-PF.php");
-
-            // $sql = "INSERT INTO con_PF ()
-            // VALUES ()";
+        }
+        if($selectOption == 'PGTO' ){
+            header("Location: insert-PGTO.php");
         }
         ?>
     </div>

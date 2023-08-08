@@ -35,10 +35,10 @@
         </div>
         <div>
             <valor-box>
-                Valor Total: R$ <?php echo $pf->getFormatedValue($pf->getValue())?>
+                Valor Total: <?php echo $pf->getFormatedValue($pf->getValue())?>
             </valor-box>
             <valor-box>
-               Valor Restante: R$ <?php echo $pf->getFormatedValue($pf->getDisp())?>
+               Valor Restante: <?php echo $pf->getFormatedValue($pf->getDisp())?>
             </valor-box>
         </div>
         <div>
@@ -63,10 +63,10 @@
         </div>
         <div>
             <valor-box>
-                Valor Total: R$ <?php echo $pf->getFormatedValue($pf->getValue())?>
+                Valor Total: <?php echo $pf->getFormatedValue($pf->getValue())?>
             </valor-box>
             <valor-box>
-               Valor Restante: R$ <?php echo $pf->getFormatedValue($pf->getDisp())?>
+               Valor Restante: <?php echo $pf->getFormatedValue($pf->getDisp())?>
             </valor-box>
         </div>
         <div>

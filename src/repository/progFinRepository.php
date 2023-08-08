@@ -65,11 +65,17 @@
         public function salvar(progFin $progFin){
             $sql = "INSERT INTO con_PF (numero, valor, dt_siafi, conta, resp) VALUES (?,?,?,?,?)";
             $statement = $this->pdo->prepare($sql);
-            $statement->bindValue(1, $progFin->getNumber());
+            $statement->bindValue(1, $progFin->getYearDate($progFin->getDate()).'PF'.sprintf('%06d', $progFin->getNumber()));
             $statement->bindValue(2, $progFin->getValue());
             $statement->bindValue(3, $progFin->getDate());
             $statement->bindValue(4,$progFin->getConta());
             $statement->bindValue(5, $progFin->getResp());
+            $statement->execute();
+            $id = $this->pdo->lastInsertId();
+            $sql = "INSERT INTO disp_PF (pf_reg, disp) VALUES (?,?)";
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue(1, $id);
+            $statement->bindValue(2, $progFin->getDisp());
             $statement->execute();
         }
     }

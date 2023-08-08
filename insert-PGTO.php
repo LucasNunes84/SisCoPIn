@@ -1,8 +1,13 @@
 <?php
 
     require "src/bd-connect.php";
+    require "src/model/pgto.php";
     require "src/model/progFin.php";
+    require "src/repository/pgtoRepository.php";
     require "src/repository/progFinRepository.php";
+
+    $progFinRepository = new progFinRepository($pdo);
+    $dadosPF = $progFinRepository->openPF();
 
 ?>
 <!DOCTYPE html>
@@ -23,8 +28,8 @@
     </div>
 </header>
 <body>
-    <h1 style="text-align: center;color:white;">PROGRAMAÇÃO FINANCEIRA</h1>
-    <h2>crédito</h2>
+    <h1 style="text-align: center;color:white;">PAGAMENTO</h1>
+    <h2>débito</h2>
     <div class="box-insert">
         <form method="post">
             <label >TIPO DO DADO INSERIDO:</label>
@@ -49,20 +54,16 @@
         ?>
         <div class="box-insert" style="background-color: #92A299">
             <form method="post">
-                <label2>Número da PF:</label2>
-                <input type="number" name="numero" />
-                <label2>Conta:</label2>
-                <select style="margin-right: 1.4vw;" name="conta">
-                    <option value="">ESCOLHA UMA CONTA</option>
-                    <option value="TDCNAB240">TDCNAB240</option>
-                    <option value="TDINC2222">TDINC2222</option>
-                    <option value="160063">160063</option>
-                    <option value="REP">Repasse</option>
+                <label2>PF Aberta:</label2>
+                <select style="margin-right: 1.4vw;" name="vincPF">
+                <?php foreach($dadosPF as $pf): ?>
+                    <option value="<?php echo $pf->getNumber()?>"><?php echo $pf->getNumber()?></option>
+                <?php endforeach; ?>
                 </select>
-                <label2>Data:</label2>
-                <input type="date" name="dt_siafi" />
-                <label2>UG/Credor:</label2>
-                <input type="text" name="resp" />
+                <label2>Data do pagamento:</label2>
+                <input type="date" name="dt_pgto" />
+                <label2>Credor:</label2>
+                <input type="text" name="cred" />
                 <label2>Valor:</label2>
                 <input type="number" min="1" step="any" name="valor"><br>
                 <label2 style="align-content:left">Observação:</label2><br>
@@ -71,17 +72,15 @@
             </form>
             <?php
                 if (isset($_POST['cadastro'])){
-                    $progFin = new progFin(null,
-                        $_POST['numero'],
+                    $pgto = new pgto(null,
+                        $_POST['vincPF'],
                         $_POST['valor'],
-                        $_POST['dt_siafi'],
-                        $_POST['conta'],
-                        $_POST['resp'],
-                        $_POST['valor']
+                        $_POST['dt_pgto'],
+                        $_POST['cred']
                     );
             
-                    $progFinRepository = new progFinRepository($pdo);
-                    $progFinRepository->salvar($progFin);
+                    $pgtoRepository = new pgtoRepository($pdo);
+                    $pgtoRepository->salvar($pgto);
                 }       
             ?>
         </div>

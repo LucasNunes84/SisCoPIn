@@ -2,31 +2,25 @@
 
 setlocale(LC_MONETARY,'pt_BR');
 
-class progFin{
+class pgto{
 
     private ?int $id;
 
-    private string $numero;
+    private string $vincPF;
 
     private string $valor;
 
-    private string $conta;
+    private string $cred;
 
-    private string $resp;
+    private string $dt_pgto;
 
-    private string $disp;
-
-    private string $dt_siafi;
-
-    public function __construct(?int $id, string $numero, string $valor, string $dt_siafi, string $conta, string $resp, string $disp)
+    public function __construct(?int $id, string $vincPF, string $valor, string $dt_pgto, string $cred)
     {
         $this->id = $id;
-        $this->numero = $numero;
-        $this->conta = $conta;
-        $this->resp = $resp;
+        $this->vincPF = $vincPF;
+        $this->cred = $cred;
         $this->valor = $valor;
-        $this->disp = $disp;
-        $this->dt_siafi = $dt_siafi;
+        $this->dt_pgto = $dt_pgto;
    }
    
    public function getFormatedValue(string $valor): string
@@ -45,28 +39,24 @@ class progFin{
         return date("Y", strtotime($date));
     }
 
-    public function getNumber(): string{
-        return $this->numero;
+    public function getVincPF(): string{
+        return $this->vincPF;
     }
 
     public function getConta(): string{
         return $this->conta;
     }
     
-    public function getResp(): string{
-        return $this->resp;
+    public function getCred(): string{
+        return $this->cred;
     }
 
     public function getValue(): string{
         return $this->valor;
     }
 
-    public function getDisp(): string{
-        return $this->disp;
-    }
-
     public function getDate(): string{
-        return $this->dt_siafi;
+        return $this->dt_pgto;
     }
 
 }
