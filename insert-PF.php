@@ -94,9 +94,14 @@
                         $_POST['resp'],
                         $_POST['valor']
                     );
-            
-                    $progFinRepository = new progFinRepository($pdo);
-                    $progFinRepository->salvar($progFin);
+
+                    if($progFin->isFull()){
+                        $progFinRepository = new progFinRepository($pdo);
+                        $progFinRepository->salvar($progFin);
+                    }else{
+                        echo
+                        '<script>alert("Há algum erro para inserção da PF, favor verificar todos os campos!")</script>';
+                    }
                 }       
             ?>
         </div>

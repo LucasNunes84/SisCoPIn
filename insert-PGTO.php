@@ -94,9 +94,14 @@
                         $_POST['dt_pgto'],
                         $_POST['cred']
                     );
-            
-                    $pgtoRepository = new pgtoRepository($pdo);
-                    $pgtoRepository->salvar($pgto);
+
+                    if($pgto->isFull()){
+                        $pgtoRepository = new pgtoRepository($pdo);
+                        $pgtoRepository->salvar($pgto);
+                    }else{
+                        echo
+                        '<script>alert("Há algum erro para inserção do pagamento, favor verificar todos os campos!")</script>';
+                    }                
                 }       
             ?>
         </div>

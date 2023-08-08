@@ -69,6 +69,13 @@ class progFin{
         return $this->dt_siafi;
     }
 
+    public function isFull(): bool{
+        if(empty($this->numero) || empty($this->valor) || empty($this->conta) || empty($this->resp) ||empty($this->dt_siafi)){
+            return false;
+        }
+        return true;
+    }
+
 }
 
 ?>

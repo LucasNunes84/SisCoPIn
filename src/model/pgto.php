@@ -59,6 +59,13 @@ class pgto{
         return $this->dt_pgto;
     }
 
+    public function isFull(): bool{
+        if(empty($this->vincPF) || empty($this->cred) || empty($this->valor) || empty($this->dt_pgto)){
+            return false;
+        }
+        return true;
+    }
+
 }
 
 ?>
