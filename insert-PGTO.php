@@ -10,10 +10,25 @@
     $dadosPF = $progFinRepository->openPF();
 
 ?>
+
 <!DOCTYPE html>
 <head>
     <link rel="stylesheet" href="index.css">
     <meta charset="UTF-8"/>
+    <script>
+    function formatCurrency(input) {
+        // Remove todos os caracteres não numéricos
+        var value = input.value.replace(/\D/g, '');
+
+        // Adiciona a vírgula para separar os centavos
+        if (value.length > 2) {
+            value = value.substring(0, value.length - 2) + '.' + value.substring(value.length - 2);
+        }
+
+        // Atualiza o valor no input
+        input.value = value;
+    }
+</script>
 </head>
 <header>
     <div class="head_logo" style="text-align: center;">
@@ -65,7 +80,8 @@
                 <label2>Credor:</label2>
                 <input type="text" name="cred" />
                 <label2>Valor:</label2>
-                <input type="number" min="1" step="any" name="valor"><br>
+                <input type="text" name="valor" id="valor" onkeyup="formatCurrency(this)" placeholder="Digite o valor">
+                <br>
                 <label2 style="align-content:left">Observação:</label2><br>
                 <textarea type="text" id="textbox" name="obs" placeholder="insira aqui uma observação."></textarea><br>
                 <input type="submit" name="cadastro" />
