@@ -14,17 +14,17 @@
             $statement = $this->pdo->query($sql);
             $pf = $statement -> fetch(PDO::FETCH_ASSOC);
             if($pf['disp']>=$pgto->getValue()){
-                $sql = "INSERT INTO pgto_PF (id_pgto_pf, valor_pgto, dt_pgto, credor) VALUES (?,?,?,?)";  
+                $sql = "INSERT INTO pgto_PF (id_pgto_pf, valor_pgto, dt_pgto, credor, doc_hab) VALUES (?,?,?,?,?)";  
                 $statement = $this->pdo->prepare($sql);
                 $statement->bindValue(1, $pf['id_disp']);
                 $statement->bindValue(2, $pgto->getValue());
                 $statement->bindValue(3, $pgto->getDate());
                 $statement->bindValue(4, $pgto->getCred());
+                $statement->bindValue(5, $pgto->getYearDate($pgto->getDate()).'DT'.sprintf('%06d', $pgto->getDocHab()));
                 $statement->execute();
                 $sql = "UPDATE disp_pf SET disp=".($pf['disp']-$pgto->Getvalue())." WHERE (id_disp= '".$pf['id_disp']."');";
                 $statement = $this->pdo->query($sql);
             }
-
         }
     }
 ?>

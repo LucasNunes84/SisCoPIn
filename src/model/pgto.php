@@ -14,13 +14,16 @@ class pgto{
 
     private string $dt_pgto;
 
-    public function __construct(?int $id, string $vincPF, string $valor, string $dt_pgto, string $cred)
+    private string $doc_hab;
+
+    public function __construct(?int $id, string $vincPF, string $valor, string $dt_pgto, string $cred, string $doc_hab)
     {
         $this->id = $id;
         $this->vincPF = $vincPF;
         $this->cred = $cred;
         $this->valor = $valor;
         $this->dt_pgto = $dt_pgto;
+        $this->doc_hab = $doc_hab;
    }
    
    public function getFormatedValue(string $valor): string
@@ -59,8 +62,12 @@ class pgto{
         return $this->dt_pgto;
     }
 
+    public function getDocHab(): string{
+        return $this->doc_hab;
+    }
+
     public function isFull(): bool{
-        if(empty($this->vincPF) || empty($this->cred) || empty($this->valor) || empty($this->dt_pgto)){
+        if(empty($this->vincPF) || empty($this->cred) || empty($this->valor) || empty($this->dt_pgto) || empty($this->doc_hab)){
             return false;
         }
         return true;

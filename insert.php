@@ -16,7 +16,8 @@
     </div>
     <div style="background-color:#1D211C; scale:105%">
         <div class="topnav">
-            <a href="index.php">Início</a>
+            <a href="main-page.php">Início</a>
+            <a href="index.php">Situação por PF</a>
             <a class="active" href="insert.php">Inserir</a>
             <a href="">Gerar PDF</a>
         </div>

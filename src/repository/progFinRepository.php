@@ -78,5 +78,36 @@
             $statement->bindValue(2, $progFin->getDisp());
             $statement->execute();
         }
+        
+        //RETORNA VALORES RECEBIDOS E DISPONIVEIS POR CONTA
+        public function contaTotalValue(string $searchConta){
+            $sql1 = "SELECT 
+                con_PF.valor, disp_PF.disp
+            FROM 
+                con_PF, disp_PF
+            WHERE 
+                con_PF.id_reg=disp_PF.pf_reg AND con_PF.conta='".$searchConta."'"
+            ;
+
+            $statement = $this->pdo->query($sql1);
+            $pfByConta = $statement -> fetchAll(PDO::FETCH_ASSOC);
+
+            $totalRecebidoConta = 0;
+            $restanteConta = 0;
+
+            foreach($pfByConta as $PF){
+                $totalRecebidoConta = $totalRecebidoConta + $PF['valor'];
+                $restanteConta = $restanteConta + $PF['disp'];
+            }
+            $conta = new conta($totalRecebidoConta, $searchConta, $restanteConta);
+            return $conta;
+        }
+
+        public function allContasDB(){
+            $sql1 = "SELECT DISTINCT con_PF.conta FROM con_PF";
+            $statement = $this->pdo->query($sql1);
+            $allContas = $statement -> fetchAll(PDO::FETCH_ASSOC);
+            return $allContas;
+        }
     }
 ?>

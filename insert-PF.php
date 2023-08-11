@@ -31,7 +31,8 @@
     </div>
     <div style="background-color:#1D211C; scale:105%">
         <div class="topnav">
-            <a href="index.php">Início</a>
+            <a href="main-page.php">Início</a>
+            <a href="index.php">Situação por PF</a>
             <a class="active" href="insert.php">Inserir</a>
             <a href="">Gerar PDF</a>
         </div>
@@ -72,7 +73,9 @@
                     <option value="TDCNAB240">TDCNAB240</option>
                     <option value="TDINC2222">TDINC2222</option>
                     <option value="160063">160063</option>
-                    <option value="REP">Repasse</option>
+                    <option value="TDBLOQ001">TDBLOQ001</option>
+                    <option value="TDBLOQ033">TDBLOQ033</option>
+                    <option value="TDNREL104">TDNREL104</option>
                 </select>
                 <label2>Data:</label2>
                 <input type="date" name="dt_siafi" />

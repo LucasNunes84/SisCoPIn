@@ -28,7 +28,7 @@
         // Atualiza o valor no input
         input.value = value;
     }
-</script>
+    </script>
 </head>
 <header>
     <div class="head_logo" style="text-align: center;">
@@ -36,7 +36,8 @@
     </div>
     <div style="background-color:#1D211C; scale:105%">
         <div class="topnav">
-            <a href="index.php">Início</a>
+            <a href="main-page.php">Início</a>
+            <a href="index.php">Situação por PF</a>
             <a class="active" href="insert.php">Inserir</a>
             <a href="">Gerar PDF</a>
         </div>
@@ -81,6 +82,8 @@
                 <input type="text" name="cred" />
                 <label2>Valor:</label2>
                 <input type="text" name="valor" id="valor" onkeyup="formatCurrency(this)" placeholder="Digite o valor">
+                <label2>Numero Doc Hab:</label2>
+                <input type="text" name="doc_hab" />
                 <br>
                 <label2 style="align-content:left">Observação:</label2><br>
                 <textarea type="text" id="textbox" name="obs" placeholder="insira aqui uma observação."></textarea><br>
@@ -92,7 +95,8 @@
                         $_POST['vincPF'],
                         $_POST['valor'],
                         $_POST['dt_pgto'],
-                        $_POST['cred']
+                        $_POST['cred'],
+                        $_POST['doc_hab']
                     );
 
                     if($pgto->isFull()){
