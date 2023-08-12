@@ -28,6 +28,11 @@ class progFin{
         $this->disp = $disp;
         $this->dt_siafi = $dt_siafi;
    }
+
+   public function getId(): string
+   {
+        return $this->id;
+   }
    
    public function getFormatedValue(string $valor): string
    {

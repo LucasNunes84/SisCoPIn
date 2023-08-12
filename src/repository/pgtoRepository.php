@@ -10,11 +10,22 @@
 
 
         public function salvar(pgto $pgto){
-            $sql = "SELECT con_PF.id_reg, disp_PF.id_disp, disp_PF.disp FROM con_PF, disp_PF WHERE con_PF.numero='". $pgto->getVincPF() ."' AND con_PF.id_reg=disp_PF.pf_reg"; 
+            $sql = "SELECT 
+                        con_PF.id_reg, disp_PF.id_disp, disp_PF.disp 
+                    FROM 
+                        con_PF, disp_PF 
+                    WHERE 
+                        con_PF.numero='". $pgto->getVincPF() ."' AND con_PF.id_reg=disp_PF.pf_reg"
+                    ; 
             $statement = $this->pdo->query($sql);
             $pf = $statement -> fetch(PDO::FETCH_ASSOC);
             if($pf['disp']>=$pgto->getValue()){
-                $sql = "INSERT INTO pgto_PF (id_pgto_pf, valor_pgto, dt_pgto, credor, doc_hab) VALUES (?,?,?,?,?)";  
+                $sql = "INSERT INTO 
+                            pgto_PF (id_pgto_pf, valor_pgto, dt_pgto, credor, doc_hab) 
+                        VALUES 
+                            (?,?,?,?,?)"
+                        ;
+
                 $statement = $this->pdo->prepare($sql);
                 $statement->bindValue(1, $pf['id_disp']);
                 $statement->bindValue(2, $pgto->getValue());
@@ -22,9 +33,42 @@
                 $statement->bindValue(4, $pgto->getCred());
                 $statement->bindValue(5, $pgto->getYearDate($pgto->getDate()).'DT'.sprintf('%06d', $pgto->getDocHab()));
                 $statement->execute();
-                $sql = "UPDATE disp_pf SET disp=".($pf['disp']-$pgto->Getvalue())." WHERE (id_disp= '".$pf['id_disp']."');";
+
+                $sql = "UPDATE 
+                            disp_pf 
+                        SET 
+                            disp=".($pf['disp']-$pgto->Getvalue())." 
+                        WHERE 
+                            (id_disp= '".$pf['id_disp']."');"
+                        ;
                 $statement = $this->pdo->query($sql);
             }
         }
-    }
+
+        public function searchPgtoFromPF(int $idPF){
+            $sql = "SELECT 
+                        pgto_PF.id_reg, pgto_PF.id_pgto_pf, pgto_PF.valor_pgto, pgto_PF.dt_pgto, pgto_PF.credor, pgto_PF.doc_hab 
+                    FROM 
+                        pgto_PF 
+                    WHERE 
+                        id_pgto_pf='".$idPF
+                    ;
+
+            $statement = $this->pdo -> query($sql);
+            $selectPgto = $statement -> fetchAll(PDO::FETCH_ASSOC);
+            
+            $dadosPgto = array_map(function ($pgto){
+                return new pgto(
+                    $pgto['id_reg'],
+                    $pgto['id_pgto_pf'],
+                    $pgto['valor_pgto'],
+                    $pgto['dt_pgto'],
+                    $pgto['cred'],
+                    $pgto['doc_hab']
+                );
+            }, $selectPgto);
+
+            return $dadosPgto;
+        }
+    } 
 ?>
