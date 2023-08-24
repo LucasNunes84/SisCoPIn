@@ -70,5 +70,21 @@
 
             return $dadosPgto;
         }
+
+        public function deleteFromPF(int $id)
+        {
+            //busca o id da PF disponivel
+            $sql = "SELECT id_disp FROM disp_PF WHERE pf_reg = ".$id;
+            //armazena no result
+            $statement = $this->pdo->query($sql);
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            //deleta onde possui o resultado
+            $sql = "DELETE FROM pgto_pf WHERE id_pgto_pf = ".$result['id_disp'];
+            $statement = $this->pdo->query($sql);
+            //deleta o id da PF disponivel
+            $sql = "DELETE FROM disp_PF WHERE pf_reg = ".$id;
+            $statement = $this->pdo->query($sql);
+
+        }
     } 
 ?>

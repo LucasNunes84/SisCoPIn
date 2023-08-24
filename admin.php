@@ -12,6 +12,14 @@
 <head>
     <link rel="stylesheet" href="index.css">
     <meta charset="UTF-8"/>
+    <script>
+      function clicked(e)
+      {
+          if(!confirm('Ao deletar uma PF serão DELETADOS TODOS OS PAGAMENTO vinculados a ela! Você tem certeza?')) {
+              e.preventDefault();
+          }
+      }
+    </script>
 </head>
 <header>
     <div class="head_logo" style="text-align: center;">
@@ -33,10 +41,10 @@
   <table>
     <thead>
       <tr>
-        <th>Produto</th>
-        <th>Tipo</th>
-        <th>Descricão</th>
-        <th>Valor</th>
+        <th>Número</th>
+        <th>Conta</th>
+        <th>Valor Recebido</th>
+        <th>Valor Restante</th>
         <th colspan="2">Ação</th>
       </tr>
     </thead>
@@ -47,11 +55,11 @@
           <td><?= $PF->getConta() ?></td>
           <td><?= $PF->getFormatedValue($PF->getValue()) ?></td>
           <td><?= $PF->getFormatedValue($PF->getDisp()) ?></td>
-          <td><a class="botao-editar" href="editar-produto.html">Editar</a></td>
+          <td><a class="botao-editar" href="editar-PF.html">Editar</a></td>
           <td>
-            <form action="excluir-produto.php" method="post">
-                <input type="hidden" name="id" value="<?= $PF->getId() ?>">
-              <input type="submit" class="botao-excluir" value="Excluir">
+            <form action="excluir-PF.php" method="post">
+              <input type="hidden" name="id" value="<?= $PF->getId() ?>">
+              <input type="submit" onclick="clicked(event)" class="botao-excluir" value="Excluir">
             </form>
           </td>
         </tr>

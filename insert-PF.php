@@ -75,7 +75,10 @@
                     <option value="160063">160063</option>
                     <option value="TDBLOQ001">TDBLOQ001</option>
                     <option value="TDBLOQ033">TDBLOQ033</option>
+                    <option value="TDBLOQ041">TDBLOQ041</option>
+                    <option value="TDBLOQ104">TDBLOQ104</option>
                     <option value="TDNREL104">TDNREL104</option>
+                    <option value="TDREVMILA">TDREVMILA</option>
                 </select>
                 <label2>Data:</label2>
                 <input type="date" name="dt_siafi" />

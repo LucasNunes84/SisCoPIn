@@ -136,5 +136,18 @@
             $allContas = $statement -> fetchAll(PDO::FETCH_ASSOC);
             return $allContas;
         }
+
+        public function delete(int $id)
+        {
+            //DELETAR PAGAMENTO
+            $pgtoRepository = new pgtoRepository($this->pdo);
+            $pgtoRepository->deleteFromPF($id);
+            //DELETAR PF APÓS DELETAR TODOS PAGAMENTOS E ABA DISPONÍVEL
+            $sql = "DELETE FROM con_PF WHERE id_reg = ?";
+            $statement = $this->pdo->prepare($sql);
+            $statement->bindValue(1,$id);
+            $statement->execute();
+    
+        }
     }
 ?>

@@ -150,7 +150,7 @@ table{
 }
 table, th, td{
   border: 1px solid #014005;
-  margin: 4.4vw
+  margin: 4.4vw;
 }
 
 table th{
@@ -182,4 +182,26 @@ table td{
   color: #16600f;
   text-align: center;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.botao-editar{
+    background: #9B8357;
+}
+
+.botao-excluir{
+    background: crimson;
+    color: white;
+    border-radius: 9px;
+    
+}
+
+a.button {
+  font-size: 210%;
+  margin-left: 46%;
+  padding: 8px;
+  border-radius: 6px;
+  background-color: white;
+  text-decoration: none;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: goldenrod;
 }
