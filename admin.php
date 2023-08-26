@@ -56,7 +56,12 @@
               <td><?= $PF->getConta() ?></td>
               <td><?= $PF->getFormatedValue($PF->getValue()) ?></td>
               <td><?= $PF->getFormatedValue($PF->getDisp()) ?></td>
-              <td><a class="botao-editar" href="editar-PF.html">Editar</a></td>
+              <td>
+                <form action="edit-PF.php" method="post">
+                  <input type="hidden" name="id" value="<?= $PF->getId() ?>">
+                  <input type="submit" value="Editar">
+                </form>
+              </td>
               <td>
                 <form action="excluir-PF.php" method="post">
                   <input type="hidden" name="id" value="<?= $PF->getId() ?>">
@@ -87,7 +92,7 @@
               <td><?= $PF->getConta() ?></td>
               <td><?= $PF->getFormatedValue($PF->getValue()) ?></td>
               <td><?= $PF->getFormatedValue($PF->getDisp()) ?></td>
-              <td><a class="botao-editar" href="editar-PF.html">Editar</a></td>
+              <td><a class="botao-editar" href="edit-PF.php">Editar</a></td>
               <td>
                 <form action="excluir-PF.php" method="post">
                   <input type="hidden" name="id" value="<?= $PF->getId() ?>">

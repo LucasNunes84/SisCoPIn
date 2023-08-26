@@ -71,6 +71,37 @@
             return $dadosPgto;
         }
 
+        public function getPgtoFromPFID(int $id){
+            //busca o id da PF disponivel
+            $sql = "SELECT id_disp FROM disp_PF WHERE pf_reg = ".$id;
+            //armazena no result
+            $statement = $this->pdo->query($sql);
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            $sql = "SELECT 
+                        pgto_PF.id_reg, pgto_PF.id_pgto_pf, pgto_PF.valor_pgto, pgto_PF.dt_pgto, pgto_PF.credor, pgto_PF.doc_hab 
+                    FROM 
+                        pgto_PF 
+                    WHERE 
+                        id_pgto_pf=".$result['id_disp']
+                    ;
+
+            $statement = $this->pdo -> query($sql);
+            $selectPgto = $statement -> fetchAll(PDO::FETCH_ASSOC);
+
+            $dadosPgto = array_map(function ($pgto){
+                return new pgto(
+                    $pgto['id_reg'],
+                    $pgto['id_pgto_pf'],
+                    $pgto['valor_pgto'],
+                    $pgto['dt_pgto'],
+                    $pgto['credor'],
+                    $pgto['doc_hab']
+                );
+            }, $selectPgto);
+
+            return $dadosPgto;
+        }
+
         public function deleteFromPF(int $id)
         {
             //busca o id da PF disponivel
