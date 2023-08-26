@@ -5,7 +5,8 @@
     require "src/repository/progFinRepository.php";
 
     $progFinRepository = new progFinRepository($pdo);
-    $dadosPF = $progFinRepository->allPF();
+    $dadosPF = $progFinRepository->allActivePF();
+    $dadosInactivePF = $progFinRepository->allInvalidPF();
 
 ?>
 <!DOCTYPE html>
@@ -35,33 +36,66 @@
     </div>
 </header>
 <body>
-<h2>Lista de Produtos</h2>
+    <h1 style="text-align: center; color: white;margin-bottom:-4vh">Lista de PF ativas</h1>
 
-<section class="container-table">
-  <table>
-    <thead>
-      <tr>
-        <th>Número</th>
-        <th>Conta</th>
-        <th>Valor Recebido</th>
-        <th>Valor Restante</th>
-        <th colspan="2">Ação</th>
-      </tr>
-    </thead>
-    <tbody>
-    <?php foreach ($dadosPF as $PF): ?>
-        <tr>
-          <td><?= $PF->getNumber() ?></td>
-          <td><?= $PF->getConta() ?></td>
-          <td><?= $PF->getFormatedValue($PF->getValue()) ?></td>
-          <td><?= $PF->getFormatedValue($PF->getDisp()) ?></td>
-          <td><a class="botao-editar" href="editar-PF.html">Editar</a></td>
-          <td>
-            <form action="excluir-PF.php" method="post">
-              <input type="hidden" name="id" value="<?= $PF->getId() ?>">
-              <input type="submit" onclick="clicked(event)" class="botao-excluir" value="Excluir">
-            </form>
-          </td>
-        </tr>
-    <?php endforeach; ?>
+    <section class="container-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Número</th>
+            <th>Conta</th>
+            <th>Valor Recebido</th>
+            <th>Valor Restante</th>
+            <th colspan="2">Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($dadosPF as $PF): ?>
+            <tr>
+              <td><?= $PF->getNumber() ?></td>
+              <td><?= $PF->getConta() ?></td>
+              <td><?= $PF->getFormatedValue($PF->getValue()) ?></td>
+              <td><?= $PF->getFormatedValue($PF->getDisp()) ?></td>
+              <td><a class="botao-editar" href="editar-PF.html">Editar</a></td>
+              <td>
+                <form action="excluir-PF.php" method="post">
+                  <input type="hidden" name="id" value="<?= $PF->getId() ?>">
+                  <input type="submit" onclick="clicked(event)" class="botao-excluir" value="Excluir">
+                </form>
+              </td>
+            </tr>
+        <?php endforeach; ?>
+      </table>
+
+    <h1 style="text-align: center; color: white;margin-bottom:-4vh">Lista de PF inativas</h1>
+
+    <section class="container-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Número</th>
+            <th>Conta</th>
+            <th>Valor Recebido</th>
+            <th>Valor Restante</th>
+            <th colspan="2">Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($dadosInactivePF as $PF): ?>
+            <tr>
+              <td><?= $PF->getNumber() ?></td>
+              <td><?= $PF->getConta() ?></td>
+              <td><?= $PF->getFormatedValue($PF->getValue()) ?></td>
+              <td><?= $PF->getFormatedValue($PF->getDisp()) ?></td>
+              <td><a class="botao-editar" href="editar-PF.html">Editar</a></td>
+              <td>
+                <form action="excluir-PF.php" method="post">
+                  <input type="hidden" name="id" value="<?= $PF->getId() ?>">
+                  <input type="submit" onclick="clicked(event)" class="botao-excluir" value="Excluir">
+                </form>
+              </td>
+            </tr>
+        <?php endforeach; ?>
+        </table>
+
 </body>

@@ -79,10 +79,10 @@
             $statement = $this->pdo->query($sql);
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             //deleta onde possui o resultado
-            $sql = "DELETE FROM pgto_pf WHERE id_pgto_pf = ".$result['id_disp'];
+            $sql = "UPDATE pgto_PF SET validade='N' WHERE id_pgto_pf = ".$result['id_disp'];
             $statement = $this->pdo->query($sql);
             //deleta o id da PF disponivel
-            $sql = "DELETE FROM disp_PF WHERE pf_reg = ".$id;
+            $sql = "UPDATE disp_PF SET validade='N' WHERE pf_reg = ".$id;
             $statement = $this->pdo->query($sql);
 
         }

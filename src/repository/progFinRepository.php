@@ -8,13 +8,40 @@
             $this->pdo = $pdo;
         }
 
-        public function allPF(){
+        public function allActivePF(){
             $sql1 = "SELECT 
                 con_PF.id_reg, con_PF.numero, con_PF.valor, con_PF.dt_siafi, con_PF.conta, con_PF.resp, disp_PF.disp
             FROM 
                 con_PF, disp_PF
             WHERE 
-                con_PF.id_reg=disp_PF.pf_reg"
+                con_PF.id_reg=disp_PF.pf_reg AND con_PF.ativo='S'"
+            ;
+
+            $statement = $this->pdo -> query($sql1);
+            $progFin = $statement -> fetchAll(PDO::FETCH_ASSOC);
+            
+            $dadosPF = array_map(function ($PF){
+                return new progFin(
+                    $PF['id_reg'],
+                    $PF['numero'],
+                    $PF['valor'],
+                    $PF['dt_siafi'],
+                    $PF['conta'],
+                    $PF['resp'],
+                    $PF['disp']
+                );
+            }, $progFin);
+
+            return $dadosPF;
+        }
+
+        public function allInvalidPF(){
+            $sql1 = "SELECT 
+                con_PF.id_reg, con_PF.numero, con_PF.valor, con_PF.dt_siafi, con_PF.conta, con_PF.resp, disp_PF.disp
+            FROM 
+                con_PF, disp_PF
+            WHERE 
+                con_PF.id_reg=disp_PF.pf_reg AND con_PF.ativo='N'"
             ;
 
             $statement = $this->pdo -> query($sql1);
@@ -41,7 +68,7 @@
             FROM 
                 con_PF, disp_PF
             WHERE 
-                con_PF.id_reg=disp_PF.pf_reg AND disp_PF.disp>0"
+                con_PF.id_reg=disp_PF.pf_reg AND disp_PF.disp>0 AND con_PF.ativo='S'"
             ;
 
             $statement = $this->pdo -> query($sql1);
@@ -68,7 +95,7 @@
             FROM 
                 con_PF, disp_PF
             WHERE 
-                con_PF.id_reg=disp_PF.pf_reg AND disp_PF.disp=0"
+                con_PF.id_reg=disp_PF.pf_reg AND disp_PF.disp=0 AND con_PF.ativo='S'"
             ;
 
             $statement = $this->pdo->query($sql1);
@@ -113,7 +140,7 @@
             FROM 
                 con_PF, disp_PF
             WHERE 
-                con_PF.id_reg=disp_PF.pf_reg AND con_PF.conta='".$searchConta."'"
+                con_PF.id_reg=disp_PF.pf_reg AND con_PF.ativo='S' AND con_PF.conta='".$searchConta."'"
             ;
 
             $statement = $this->pdo->query($sql1);
@@ -131,7 +158,7 @@
         }
 
         public function allContasDB(){
-            $sql1 = "SELECT DISTINCT con_PF.conta FROM con_PF";
+            $sql1 = "SELECT DISTINCT con_PF.conta FROM con_PF WHERE ativo='S'";
             $statement = $this->pdo->query($sql1);
             $allContas = $statement -> fetchAll(PDO::FETCH_ASSOC);
             return $allContas;
@@ -143,7 +170,7 @@
             $pgtoRepository = new pgtoRepository($this->pdo);
             $pgtoRepository->deleteFromPF($id);
             //DELETAR PF APÓS DELETAR TODOS PAGAMENTOS E ABA DISPONÍVEL
-            $sql = "DELETE FROM con_PF WHERE id_reg = ?";
+            $sql = "UPDATE con_PF SET ativo='N' WHERE id_reg = ?";
             $statement = $this->pdo->prepare($sql);
             $statement->bindValue(1,$id);
             $statement->execute();
