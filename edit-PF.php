@@ -21,7 +21,7 @@
     <script>
       function clicked(e)
       {
-          if(!confirm('Ao deletar uma PF serão DELETADOS TODOS OS PAGAMENTO vinculados a ela! Você tem certeza?')) {
+          if(!confirm('Você está prestes a apagar para sempre um pagamento lançado! Você tem certeza?')) {
               e.preventDefault();
           }
       }
@@ -77,7 +77,7 @@
             <th>Credor</th>
             <th>Valor</th>
             <th>Data</th>
-            <th colspan="2">Ação</th>
+            <th>Ação</th>
           </tr>
         </thead>
         <tbody>
@@ -87,14 +87,9 @@
               <td><?= $Pgto->getCred() ?></td>
               <td><?= $Pgto->getFormatedValue($Pgto->getValue()) ?></td>
               <td><?= $Pgto->getFormatedDate($Pgto->getDate()) ?></td>
-              <td><a class="botao-editar" href="editar-PF.html">Editar</a>
-                <form action="edit-PGTO.php" method="post">
-                  <input type="hidden" name="id" value="<?= $Pgto->getId() ?>">
-                </form>
-              </td>
               <td>
                 <form action="excluir-PGTO.php" method="post">
-                  <input type="hidden" name="id" value="<?= $Pgto->getId() ?>">
+                  <input type="hidden" name="id" value="<?= $PF->getId() ?>">
                   <input type="submit" onclick="clicked(event)" class="botao-excluir" value="Excluir">
                 </form>
               </td>

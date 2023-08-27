@@ -47,6 +47,12 @@
         if($selectOption == 'PGTO' ){
             header("Location: insert-PGTO.php");
         }
+        if($selectOption == 'REV' ){
+            header("Location: insert-REV.php");
+        }
+        if($selectOption == 'REP' ){
+            header("Location: insert-REP.php");
+        }
         ?>
     </div>
 </body>
