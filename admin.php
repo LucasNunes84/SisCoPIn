@@ -94,9 +94,9 @@
               <td><?= $PF->getFormatedValue($PF->getDisp()) ?></td>
               <td><a class="botao-editar" href="edit-PF.php">Editar</a></td>
               <td>
-                <form action="excluir-PF.php" method="post">
+                <form action="reativar-PF.php" method="post">
                   <input type="hidden" name="id" value="<?= $PF->getId() ?>">
-                  <input type="submit" onclick="clicked(event)" class="botao-excluir" value="Excluir">
+                  <input type="submit" class="botao-reativar" value="Reativar">
                 </form>
               </td>
             </tr>

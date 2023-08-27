@@ -29,7 +29,7 @@
 </header>
 <body>
     <h1 style="text-align: center;color:white;">Programações Financeiras em ABERTO</h1>
-    <a href="admin.php" class="button">Gerenciar</a>
+    <a href="admin.php" class="button">GERENCIAR</a>
     <?php foreach($dadosPF as $pf): ?>
     <div class="box">
         <div>

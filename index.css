@@ -194,14 +194,21 @@ table td{
     border-radius: 9px;
     
 }
+.botao-reativar{
+  background: blue;
+  color: white;
+  border-radius: 9px;
+  
+}
 
 a.button {
-  font-size: 210%;
-  margin-left: 46%;
+  font-size: 170%;
+  margin-left: 44vw;
   padding: 8px;
   border-radius: 6px;
   background-color: white;
   text-decoration: none;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: goldenrod;
+  font-weight: bold;
 }

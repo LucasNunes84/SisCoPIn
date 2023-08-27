@@ -7,6 +7,9 @@
   require "src/repository/pgtoRepository.php";
   require "src/repository/progFinRepository.php";
 
+  $progFinRepository = new progFinRepository($pdo);
+  $dadosPF = $progFinRepository->getFromIDPF($_POST['id']);
+
   $pgtoRepository = new pgtoRepository($pdo);
   $dadosPgto = $pgtoRepository->getPgtoFromPFID($_POST['id']);
 
@@ -38,6 +41,32 @@
     </div>
 </header>
 <body>
+    <?php foreach($dadosPF as $pf): ?>
+      <div class="box">
+          <div>
+              <PFnumber><?php echo $pf->getNumber()?></PFnumber>
+          </div>
+          <div>
+              <valor-box>
+                  Valor Total: <?php echo $pf->getFormatedValue($pf->getValue())?>
+              </valor-box>
+              <valor-box>
+                Valor Restante: <?php echo $pf->getFormatedValue($pf->getDisp())?>
+              </valor-box>
+          </div>
+          <div>
+              <p class="subinfo">
+                  Data: <?php echo $pf->getFormatedDate($pf->getDate())?>
+              </p>
+          </div>
+          <div>
+              <p class="subinfo">
+                  CC: <?php echo $pf->getConta()?> - <?php echo $pf->getResp()?>
+              </p>
+          </div>
+      </div>
+    <?php endforeach; ?>
+
     <h1 style="text-align: center; color: white;margin-bottom:-4vh">Pagamentos Vinculados a PF</h1>
 
     <section class="container-table">
