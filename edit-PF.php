@@ -65,6 +65,12 @@
               </p>
           </div>
       </div>
+      <td>
+        <form action="insert-PGTO.php" method="post">
+          <input type="hidden" name="number" value="<?= $pf->getNumber()?>">
+          <input type="submit" class="botao-add" value="VINC PGTO">
+        </form>
+      </td>
     <?php endforeach; ?>
 
     <h1 style="text-align: center; color: white;margin-bottom:-4vh">Pagamentos Vinculados a PF</h1>
@@ -89,7 +95,7 @@
               <td><?= $Pgto->getFormatedDate($Pgto->getDate()) ?></td>
               <td>
                 <form action="excluir-PGTO.php" method="post">
-                  <input type="hidden" name="id" value="<?= $PF->getId() ?>">
+                  <input type="hidden" name="id" value="<?= $Pgto->getId() ?>">
                   <input type="submit" onclick="clicked(event)" class="botao-excluir" value="Excluir">
                 </form>
               </td>

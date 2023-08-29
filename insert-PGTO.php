@@ -72,9 +72,9 @@
             <form method="post">
                 <label2>PF Aberta:</label2>
                 <select style="margin-right: 1.4vw;" name="vincPF">
-                <?php foreach($dadosPF as $pf): ?>
-                    <option value="<?php echo $pf->getNumber()?>"><?php echo $pf->getNumber()?></option>
-                <?php endforeach; ?>
+                <?php foreach($dadosPF as $pf){
+                    echo '<option value="'.$pf->getNumber().'" '.(($pf->getNumber() == $_POST['number']) ? 'selected' : '').'>'.$pf->getNumber().'</option>';
+                }?>
                 </select>
                 <label2>Data do pagamento:</label2>
                 <input type="date" name="dt_pgto" />

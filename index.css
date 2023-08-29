@@ -191,9 +191,17 @@ table td{
 .botao-excluir{
     background: crimson;
     color: white;
-    border-radius: 9px;
-    
+    border-radius: 9px;   
 }
+.botao-add{
+  background: lightgreen;
+  color: darkgreen;
+  border-radius: 9px; 
+  font-weight: bold;
+  margin-left: 85vw;
+  padding: 4px;
+}
+
 .botao-reativar{
   background: blue;
   color: white;

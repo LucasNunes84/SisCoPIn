@@ -25,6 +25,10 @@ class pgto{
         $this->dt_pgto = $dt_pgto;
         $this->doc_hab = $doc_hab;
    }
+
+   public function getID(){
+        return $this->id;
+   }
    
    public function getFormatedValue(string $valor): string
    {
