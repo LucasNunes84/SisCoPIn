@@ -82,7 +82,7 @@
                     FROM 
                         pgto_PF 
                     WHERE 
-                        id_pgto_pf=".$result['id_disp']
+                        validade='S' AND id_pgto_pf=".$result['id_disp']
                     ;
 
             $statement = $this->pdo -> query($sql);
@@ -114,6 +114,28 @@
             $statement = $this->pdo->query($sql);
             //deleta o id da PF disponivel
             $sql = "UPDATE disp_PF SET validade='N' WHERE pf_reg = ".$id;
+            $statement = $this->pdo->query($sql);
+
+        }
+        public function deleteFromID(int $idPgto, int $idPF)
+        {
+            //busca pega o valor do pgto
+            $sql = "SELECT valor_pgto FROM pgto_PF WHERE id_reg = ".$idPgto;
+            //armazena no valorPgto
+            $statement = $this->pdo->query($sql);
+            $valorPgto = $statement->fetch(PDO::FETCH_ASSOC);
+            //busca pega o valor disp na PF
+            $sql = "SELECT disp FROM disp_PF WHERE id_disp = ".$idPF;
+            //armazena no dispPF
+            $statement = $this->pdo->query($sql);
+            $dispPF = $statement->fetch(PDO::FETCH_ASSOC);
+            //soma o valor do pgto a ser deletado
+            $dispPF['disp'] = $dispPF['disp'] + $valorPgto['valor_pgto'];
+            //deleta o pgto selecionado
+            $sql = "UPDATE pgto_PF SET validade='N' WHERE id_reg = ".$idPgto;
+            $statement = $this->pdo->query($sql);
+            //altera o valor disponivel da PF
+            $sql = "UPDATE disp_PF SET disp=".$dispPF['disp']." WHERE id_disp = ".$idPF;
             $statement = $this->pdo->query($sql);
 
         }

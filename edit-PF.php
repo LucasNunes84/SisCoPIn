@@ -95,8 +95,11 @@
               <td><?= $Pgto->getFormatedDate($Pgto->getDate()) ?></td>
               <td>
                 <form action="excluir-PGTO.php" method="post">
-                  <input type="hidden" name="id" value="<?= $Pgto->getId() ?>">
-                  <input type="submit" onclick="clicked(event)" class="botao-excluir" value="Excluir">
+                  <input type="hidden" name="idPgto" value="<?= $Pgto->getId() ?>">
+                  <?php foreach ($dadosPF as $pf): ?>
+                    <input type="hidden" name="idDisp" value="<?= $pf->getId() ?>">
+                  <?php endforeach; ?>
+                    <input type="submit" onclick="clicked(event)" class="botao-excluir" value="Excluir">
                 </form>
               </td>
             </tr>

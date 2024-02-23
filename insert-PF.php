@@ -78,9 +78,11 @@
                     <option value="TDBLOQ041">TDBLOQ041</option>
                     <option value="TDBLOQ104">TDBLOQ104</option>
                     <option value="TDBLOQ237">TDBLOQ237</option>
+                    <option value="TDBLOQ341">TDBLOQ341</option>
                     <option value="TDNREL104">TDNREL104</option>
                     <option value="TDREVMILA">TDREVMILA</option>
                     <option value="TDDEVMIPE">TDDEVMIPE</option>
+                    <option value="TDDEVMIPE">FAKENEWS</option>
                 </select>
                 <label2>Data:</label2>
                 <input type="date" name="dt_siafi" />
