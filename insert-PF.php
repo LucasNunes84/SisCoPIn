@@ -62,6 +62,12 @@
         if($selectOption == 'PGTO' ){
             header("Location: insert-PGTO.php");
         }
+        if($selectOption == 'REP' ){
+            header("Location: insert-REP.php");
+        }
+        if($selectOption == 'REV' ){
+            header("Location: insert-REV.php");
+        }
         ?>
         <div class="box-insert" style="background-color: #92A299">
             <form method="post">

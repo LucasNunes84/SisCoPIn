@@ -10,7 +10,7 @@
 
         public function getFromIDPF(int $id){
             $sql1 = "SELECT 
-                con_PF.id_reg, con_PF.numero, con_PF.valor, con_PF.dt_siafi, con_PF.conta, con_PF.resp, disp_PF.disp
+                con_pf.id_reg, con_pf.numero, con_pf.valor, con_PF.dt_siafi, con_PF.conta, con_PF.resp, disp_PF.disp
             FROM 
                 con_PF, disp_PF
             WHERE 

@@ -1,9 +1,9 @@
 <?php
 
     require "src/bd-connect.php";
-    require "src/model/pgto.php";
+    require "src/model/rep.php";
     require "src/model/progFin.php";
-    require "src/repository/pgtoRepository.php";
+    require "src/repository/repRepository.php";
     require "src/repository/progFinRepository.php";
 
     $progFinRepository = new progFinRepository($pdo);
@@ -82,10 +82,10 @@
                     echo '<option value="'.$pf->getNumber().'" '.(($pf->getNumber() == $_POST['number']) ? 'selected' : '').'>'.$pf->getNumber().'</option>';
                 }?>
                 </select>
-                <label2>Data do pagamento:</label2>
-                <input type="date" name="dt_pgto" />
-                <label2>Credor:</label2>
-                <input type="text" name="cred" />
+                <label2>Data do repasse:</label2>
+                <input type="date" name="dt_rep" />
+                <label2>Destino:</label2>
+                <input type="text" name="destino" />
                 <label2>Valor:</label2>
                 <input type="text" name="valor" id="valor" onkeyup="formatCurrency(this)" placeholder="Digite o valor">
                 <label2>Numero Doc Hab:</label2>
@@ -97,22 +97,22 @@
             </form>
             <?php
                 if (isset($_POST['cadastro'])){
-                    $pgto = new pgto(null,
+                    $rep = new rep(null,
                         $_POST['vincPF'],
-                        $_POST['valor'],
-                        $_POST['dt_pgto'],
-                        $_POST['cred'],
-                        $_POST['doc_hab']
+                        $_POST['dt_rep'],
+                        $_POST['doc_hab'],
+                        $_POST['destino'],
+                        $_POST['valor']
                     );
 
-                    if($pgto->isFull()){
-                        $pgtoRepository = new pgtoRepository($pdo);
-                        $pgtoRepository->salvar($pgto);
+                    if($rep->isFull()){
+                        $repRepository = new repRepository($pdo);
+                        $repRepository->salvar($rep);
                     }else{
                         echo
                         '<script>alert("Há algum erro para inserção do pagamento, favor verificar todos os campos!")</script>';
                     }                
-                }       
+                }     
             ?>
         </div>
     </div>
