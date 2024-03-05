@@ -39,9 +39,7 @@
             <div class="box">
                 <div>
                     <PFnumber>
-                        <?php foreach($progFinRepository->getFromIDPF($pgto->getVincPF()) as $pf):?>
-                            <?php echo $pf->getNumber()?>
-                        <?php endforeach; ?>
+                        <?php echo $pgto->getDocHab()?>
                     </PFnumber>
                 </div>
                 <div>
@@ -57,7 +55,10 @@
                 </div>
                 <div>
                     <p class="subinfo">
-                        Credor: <?php echo $pgto->getCred()?> - <?php echo $pgto->getDocHab()?>
+                        Credor: <?php echo $pgto->getCred()?> -
+                        <?php foreach($progFinRepository->getFromIDPF($pgto->getVincPF()) as $pf):?>
+                            <?php echo $pf->getNumber()?>
+                        <?php endforeach; ?>
                     </p>
                 </div>
             </div>
