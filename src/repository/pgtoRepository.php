@@ -45,6 +45,31 @@
             }
         }
 
+        public function allPGTO(){
+            $sql = "SELECT 
+                        pgto_PF.id_reg, pgto_PF.id_pgto_pf, pgto_PF.valor_pgto, pgto_PF.dt_pgto, pgto_PF.credor, pgto_PF.doc_hab 
+                    FROM 
+                        pgto_PF 
+                    WHERE 
+                        validade='S'"
+            ;
+            $statement = $this->pdo -> query($sql);
+            $selectPgto = $statement -> fetchAll(PDO::FETCH_ASSOC);
+
+            $dadosPgto  = array_map(function ($pgto){
+                return new pgto(
+                    $pgto['id_reg'],
+                    $pgto['id_pgto_pf'],
+                    $pgto['valor_pgto'],
+                    $pgto['dt_pgto'],
+                    $pgto['credor'],
+                    $pgto['doc_hab']
+                );
+            }, $selectPgto);
+
+            return $dadosPgto;
+        }
+
         public function searchPgtoFromPF(int $idPF){
             $sql = "SELECT 
                         pgto_PF.id_reg, pgto_PF.id_pgto_pf, pgto_PF.valor_pgto, pgto_PF.dt_pgto, pgto_PF.credor, pgto_PF.doc_hab 
@@ -63,7 +88,7 @@
                     $pgto['id_pgto_pf'],
                     $pgto['valor_pgto'],
                     $pgto['dt_pgto'],
-                    $pgto['cred'],
+                    $pgto['credor'],
                     $pgto['doc_hab']
                 );
             }, $selectPgto);

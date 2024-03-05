@@ -30,6 +30,7 @@
         <div class="topnav">
             <a href="main-page.php">Início</a>
             <a class="active" href="index.php">Situação por PF</a>
+            <a href="all-PGTO.php">Lançamentos</a>
             <a href="insert.php">Inserir</a>
             <a href="">Gerar PDF</a>
         </div>

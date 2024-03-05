@@ -25,6 +25,7 @@
         <div class="topnav">
             <a class="active" href="main-page.php">Início</a>
             <a href="index.php">Situação por PF</a>
+            <a href="all-PGTO.php">Lançamentos</a>
             <a href="insert.php">Inserir</a>
             <a href="">Gerar PDF</a>
         </div>
