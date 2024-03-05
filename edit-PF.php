@@ -5,9 +5,11 @@
   require "src/model/pgto.php";
   require "src/model/progFin.php";
   require "src/model/rep.php";
+  require "src/model/rev.php";
   require "src/repository/pgtoRepository.php";
   require "src/repository/progFinRepository.php";
   require "src/repository/repRepository.php";
+  require "src/repository/revRepository.php";
 
   $progFinRepository = new progFinRepository($pdo);
   $dadosPF = $progFinRepository->getFromIDPF($_POST['id']);
@@ -17,6 +19,9 @@
 
   $repRepository = new repRepository($pdo);
   $dadosRep = $repRepository->getRepFromPFID($_POST['id']);
+
+  $revRepository = new revRepository($pdo);
+  $dadosRev = $revRepository->getRevFromPFID($_POST['id']);
 
 ?>
 <!DOCTYPE html>
@@ -104,7 +109,7 @@
                   <?php foreach ($dadosPF as $pf): ?>
                     <input type="hidden" name="idDisp" value="<?= $pf->getId() ?>">
                   <?php endforeach; ?>
-                    <input type="submit" onclick="clicked(event)" class="botao-excluir" value="Excluir">
+                  <input type="submit" onclick="clicked(event)" class="botao-excluir" value="Excluir">
                 </form>
               </td>
             </tr>
@@ -144,4 +149,34 @@
         <?php endforeach; ?>
       </table>
 
+      <h1 style="text-align: center; color: white;margin-bottom:-4vh">Reversões Vinculadas a PF</h1>
+
+      <section class="container-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Número GR</th>
+            <th>Valor</th>
+            <th>Data</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($dadosRev as $rev): ?>
+            <tr>
+              <td><?= $rev->getGR() ?></td>
+              <td><?= $rev->getFormatedValue($rev->getValue()) ?></td>
+              <td><?= $rev->getFormatedDate($rev->getDate()) ?></td>
+              <td>
+                <form action="excluir-REV.php" method="post">
+                  <input type="hidden" name="idRev" value="<?= $rev->getId() ?>">
+                  <?php foreach ($dadosPF as $pf): ?>
+                    <input type="hidden" name="idDisp" value="<?= $pf->getId() ?>">
+                  <?php endforeach; ?>
+                    <input type="submit" onclick="clicked(event)" class="botao-excluir" value="Excluir">
+                </form>
+              </td>
+            </tr>
+        <?php endforeach; ?>
+      </table>
 </body>
