@@ -220,3 +220,7 @@ a.button {
   color: goldenrod;
   font-weight: bold;
 }
+
+hgroup {
+  display: block;
+}

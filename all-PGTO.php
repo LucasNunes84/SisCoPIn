@@ -34,7 +34,9 @@
 </header>
 <body>
     <h1 style="text-align: center;color:white;">Todos pagamentos realizados</h1>
-    <a href="admin.php" class="button">GERENCIAR</a>
+    <hgroup>
+        <a href="admin.php" class="button">GERENCIAR</a>
+    </hgroup>
     <?php foreach(array_reverse($dadosPgto) as $pgto): ?>
             <div class="box">
                 <div>
@@ -56,7 +58,7 @@
                 <div>
                     <p class="subinfo">
                         Credor: <?php echo $pgto->getCred()?> -
-                        <?php foreach($progFinRepository->getFromIDPF($pgto->getVincPF()) as $pf):?>
+                        <?php foreach($progFinRepository->getFromIDDispPF($pgto->getVincPF()) as $pf):?>
                             <?php echo $pf->getNumber()?>
                         <?php endforeach; ?>
                     </p>
