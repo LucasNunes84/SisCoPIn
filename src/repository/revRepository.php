@@ -42,6 +42,8 @@
                             (id_disp= '".$pf['id_disp']."');"
                         ;
                 $statement = $this->pdo->query($sql);
+            }else{
+                throw new Exception('VALOR MAIOR DO QUE DISPONÍVEL NA PF');
             }
         }
 
