@@ -126,7 +126,7 @@
             $statement = $this->pdo->query($sql);
             $valorrep = $statement->fetch(PDO::FETCH_ASSOC);
             //busca pega o valor disp na PF
-            $sql = "SELECT disp FROM disp_PF WHERE id_disp = ".$idPF;
+            $sql = "SELECT disp FROM disp_PF WHERE pf_reg = ".$idPF;
             //armazena no dispPF
             $statement = $this->pdo->query($sql);
             $dispPF = $statement->fetch(PDO::FETCH_ASSOC);
@@ -136,7 +136,7 @@
             $sql = "UPDATE rep_pf SET validade='N' WHERE id_reg = ".$idrep;
             $statement = $this->pdo->query($sql);
             //altera o valor disponivel da PF
-            $sql = "UPDATE disp_PF SET disp=".$dispPF['disp']." WHERE id_disp = ".$idPF;
+            $sql = "UPDATE disp_PF SET disp=".$dispPF['disp']." WHERE pf_reg = ".$idPF;
             $statement = $this->pdo->query($sql);
 
         }
