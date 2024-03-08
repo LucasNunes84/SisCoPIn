@@ -159,6 +159,9 @@
             //deleta o pgto selecionado
             $sql = "UPDATE pgto_PF SET validade='N' WHERE id_reg = ".$idPgto;
             $statement = $this->pdo->query($sql);
+            //deleta o pgto selecionado
+            $sql = "UPDATE pgto_PF SET doc_hab='DELETADO' WHERE id_reg = ".$idPgto;
+            $statement = $this->pdo->query($sql);
             //altera o valor disponivel da PF
             $sql = "UPDATE disp_PF SET disp=".$dispPF['disp']." WHERE id_disp = ".$idPF;
             $statement = $this->pdo->query($sql);
