@@ -18,13 +18,13 @@
     foreach($dadosPF as $dado){
         switch ($dado->getYearDate($dado->getDate())){
             case '2022':
-                $valor22 += $dado->getValue();
+                $valor22 += $dado->getDisp();
             break;
             case '2023':
-                $valor23 += $dado->getValue();
+                $valor23 += $dado->getDisp();
             break;
             case '2024':
-                $valor24 += $dado->getValue();
+                $valor24 += $dado->getDisp();
             break;
         }
     }
