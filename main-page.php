@@ -10,7 +10,24 @@
     foreach($allContas as $contas){
         $dadosDashboard[$contas['conta']] = $progFinRepository->contaTotalValue($contas['conta']);
     }
-
+    $progFinRepository = new progFinRepository($pdo);
+    $dadosPF = $progFinRepository->allActivePF();
+    $valor22 = 0;
+    $valor23 = 0;
+    $valor24 = 0;
+    foreach($dadosPF as $dado){
+        switch ($dado->getYearDate($dado->getDate())){
+            case '2022':
+                $valor22 += $dado->getValue();
+            break;
+            case '2023':
+                $valor23 += $dado->getValue();
+            break;
+            case '2024':
+                $valor24 += $dado->getValue();
+            break;
+        }
+    }
 ?>
 <!DOCTYPE html>
 <head>
@@ -45,4 +62,20 @@
         </div>
     </div>
     <?php endforeach; ?>
+    
+    <div class="box">
+        <div style="margin-bottom: 6vh;">
+            <PFnumber>2022 -> <?php echo $dado->getFormatedValue($valor22)?></PFnumber>
+        </div>
+    </div>
+    <div class="box">
+        <div style="margin-bottom: 6vh;">
+            <PFnumber>2023 -> <?php echo $dado->getFormatedValue($valor23)?></PFnumber>
+        </div>
+    </div>
+    <div class="box">
+        <div style="margin-bottom: 6vh;">
+            <PFnumber>2024 -> <?php echo $dado->getFormatedValue($valor24)?></PFnumber>
+        </div>
+    </div>
 </body>
